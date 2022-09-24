@@ -21,7 +21,7 @@ attribution: 'Map data © <a href="https://www.openstreetmap.org/">OpenStreetMap
 
 // Create a base layer that holds both maps.
 let baseMaps = {
-  Streets: streets,
+  "Streets": streets,
   "Satellite Streets": satelliteStreets
 };
 
@@ -29,7 +29,7 @@ let baseMaps = {
 let map = L.map('mapid', {
   center: [43.7, -79.3],
   zoom: 11,
-  layers: [satelliteStreets]
+  layers: [streets]
 })
 
 // // Then we add our 'streets' tile layer to the map.
@@ -39,63 +39,22 @@ let map = L.map('mapid', {
 L.control.layers(baseMaps).addTo(map);
 
 // Accessing the Toronto GeoJSON URL
-let torontoHoods = "https://raw.githubusercontent.com/ajkriegz/Mapping_Earthquakes/main/Mapping_GeoJSON_Linestrings/torontoNeighborhoods.json";
+let torontoHoods = "https://raw.githubusercontent.com/ajkriegz/Mapping_Earthquakes/main/Mapping_GeoJSON_Polygons/static/js/torontoNeighborhoods.json";
 
-// Grabbing our GeoJSON data using pointToLayer.
-// L.geoJSON(sanFranAirport, {
-//   // We turn each feature into a marker on the map.
-//   pointToLayer: function(feature, latlng) {
-//     console.log(feature);
-//     return L.marker(latlng)
-//     .bindPopup("<h2>" + feature.properties.name + "</h2><hr>" + "<h3>" + feature.properties.city + ", " + feature.properties.country + "</h3>");
-//   }
-// }).addTo(map);
-
-// ~~~~~
-
-// Add GeoJSON data. This is a FeatureCollection object with properties and geometry for the SanFran airport.
-// let sanFranAirport =
-// {"type":"FeatureCollection","features":[{
-//     "type":"Feature",
-//     "properties":{
-//         "id":"3469",
-//         "name":"San Francisco International Airport",
-//         "city":"San Francisco",
-//         "country":"United States",
-//         "faa":"SFO",
-//         "icao":"KSFO",
-//         "alt":"13",
-//         "tz-offset":"-8",
-//         "dst":"A",
-//         "tz":"America/Los_Angeles"},
-//         "geometry":{
-//             "type":"Point",
-//             "coordinates":[-122.375,37.61899948120117]}} // GeoJSON coordinates appear in reverse order, with the first parameter being longitude and second parameter being latitude.
-// ]};
-// L.geoJSON(sanFranAirport, {
-//   // We turn each feature into a marker on the map.
-//   onEachFeature: function(feature, layer) {
-//     console.log(layer);
-//     layer.bindPopup("<h2>" + feature.properties.name + "</h2><hr>" + "<h3>" + feature.properties.city + ", " + feature.properties.country + "</h3>");
-//   }
-
-// }).addTo(map); // idk if all these brackets and parentheses are in the right place. It's commented out anyway 
-// but in reorganizing code for clarity upon a later viewing I may have misplaced them. 
-
-// Create a style for the lines.
 let myStyle = {
-  color: "#ffffa1",
-  weight: 2
+  color: "blue",
+  fillColor: "yellow", 
+  weight: 1
 }
 
 // Grabbing our GeoJSON data. // 
-d3.json(torontoData).then(function(data) {
+d3.json(torontoHoods).then(function(data) {
     console.log(data);
   // Creating a GeoJSON layer with the retrieved data.
   L.geoJSON(data, {
     style: myStyle,
     onEachFeature: function(feature, layer) {
-      layer.bindPopup("<h3>Toronto!</h3>");
+      layer.bindPopup("<h3>Neighborhood: " + feature.properties.AREA_NAME + "</h3>");
     }
   }).addTo(map);
 });
