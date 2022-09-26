@@ -1,12 +1,6 @@
 # Mapping Earthquakes
 
+This analysis was performed using JavaScript, the D3.js library, Leaflet.js, Mapbox, and GeoJSON. 
+
 ## Purpose
-The purpose of this project is to visually show the differences between the magnitudes of earthquakes all over the world for the last seven days.
-
-## Tasks
-To complete this project, use a URL for GeoJSON earthquake data from the USGS website and retrieve geographical coordinates and the magnitudes of earthquakes for the last seven days. Then add the data to a map.
-
-## Approach
-Your approach will be to use the JavaScript and the D3.js library to retrieve the coordinates and magnitudes of the earthquakes from the GeoJSON data. You'll use the Leaflet library to plot the data on a Mapbox map through an API request and create interactivity for the earthquake data.
-
-Now that you have an overview of the project plan, let's set up a Mapbox account and get the API token you'll need to create geographical maps.
+The purpose of this project is to visually show the differences between the magnitudes of earthquakes all over the world for the last seven days. The interactive map has three different map backgrounds and overlways to toggle fault lines, earthquake markers, and markers to specifically show major earthquakes.
